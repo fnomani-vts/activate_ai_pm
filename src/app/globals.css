@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@import "./stylesheets/tokens.css";
+@import "./stylesheets/react-select.css";
+@import "./stylesheets/keyframes.css";
+@import "./stylesheets/heatmaps.css";
+
+body {
+  color: var(--color-gray-700);
+  font-family: var(--font-inter);
+  font-weight: 400;
+}
+
+.vts-ai-underline {
+  background-image: linear-gradient(to right, var(--color-vts-ai-light), var(--color-vts-purple-800));
+}
+
+.layered-shadow {
+  box-shadow:
+    0 1px 1px hsl(0deg 0% 0% / 0.08),
+    0 2px 2px hsl(0deg 0% 0% / 0.08),
+    0 4px 4px hsl(0deg 0% 0% / 0.08),
+    0 8px 8px hsl(0deg 0% 0% / 0.08),
+    0 16px 16px hsl(0deg 0% 0% / 0.08);
+}
