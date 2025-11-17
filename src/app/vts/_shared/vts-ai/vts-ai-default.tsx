@@ -43,7 +43,7 @@ const VtsAiDefault = forwardRef<
   const [isLoading, setIsLoading] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(true);
   const [prompts, setPrompts] = useState<VtsAiPrompt[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("Deal Economics");
+  const [selectedCategory, setSelectedCategory] = useState<string>("Strategic Planning");
   const [market, setMarket] = useState<string>("all");
   const [submarket, setSubmarket] = useState<string>("all");
   const [industry, setIndustry] = useState<string>("all");
@@ -51,9 +51,9 @@ const VtsAiDefault = forwardRef<
   const [size, setSize] = useState<string>("all");
 
   const categories = [
+    { label: "Portfolio Insights", value: "Strategic Planning" },
     { label: "Deal economics", value: "Deal Economics" },
     { label: "Market demand", value: "Market Demand" },
-    { label: "Strategic planning", value: "Strategic Planning" },
   ];
 
   const initializeInputs = useCallback(() => {
@@ -116,7 +116,7 @@ const VtsAiDefault = forwardRef<
     setIsTransitioning(false);
     setPrompts(pathname === "/vts/lease/deals/profile" ? vtsAiPromptsWithContext : vtsAiPromptsWithoutContext);
     initializeInputs();
-    setSelectedCategory("Deal Economics");
+    setSelectedCategory("Strategic Planning");
   };
 
   const retryPrompt = () => {
@@ -126,7 +126,7 @@ const VtsAiDefault = forwardRef<
         () => {
           setIsLoading(false);
         },
-        Math.random() * 2000 + 3000,
+        Math.random() * 500 + 500,
       );
     }
   };
@@ -167,7 +167,7 @@ const VtsAiDefault = forwardRef<
         () => {
           setIsLoading(false);
         },
-        Math.random() * 2000 + 3000,
+        Math.random() * 500 + 500,
       );
     }
   }, [selectedPrompt]);
@@ -375,7 +375,7 @@ const VtsAiDefault = forwardRef<
                       )}
 
                       <button className="mb-3 flex w-fit cursor-pointer rounded-lg bg-[linear-gradient(110deg,var(--color-vts-ai-light)_0%,var(--color-vts-ai-medium)_10%,var(--color-vts-ai-dark)_50%,var(--color-vts-ai-gray)_200%)] px-3 py-2 text-white transition-all duration-200 hover:brightness-120">
-                        Download CSV data
+                        View Dashboard
                       </button>
 
                       {responsePayload.suggestedFollowUps && responsePayload.suggestedFollowUps.length > 0 && (
