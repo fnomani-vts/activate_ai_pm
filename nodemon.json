@@ -1,0 +1,23 @@
+{
+  "watch": [
+    "src",
+    "public",
+    "next.config.ts",
+    "tsconfig.json",
+    "postcss.config.mjs",
+    "tailwind.config.*"
+  ],
+  "ext": "ts,tsx,js,jsx,json,css,mjs",
+  "ignore": [
+    "node_modules",
+    ".next",
+    ".git",
+    "*.test.ts",
+    "*.test.tsx",
+    "*.spec.ts",
+    "*.spec.tsx"
+  ],
+  "exec": "npm run build",
+  "delay": 1000
+}
+
