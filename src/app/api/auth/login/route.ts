@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   const { password } = await request.json();
 
-  // Get password from environment variable, fallback to default
-  const correctPassword = process.env.APP_PASSWORD;
+  // Hardcoded password for app access
+  const correctPassword = "vtsai2025";
 
   if (password === correctPassword) {
     const response = NextResponse.json({ success: true });

@@ -1,13 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [redirectPath, setRedirectPath] = useState("/");
   const router = useRouter();
+
+  useEffect(() => {
+    // Get redirect parameter from URL
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const redirect = params.get("redirect");
+      if (redirect) {
+        setRedirectPath(redirect);
+      }
+    }
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,8 +36,8 @@ export default function LoginPage() {
       });
 
       if (response.ok) {
-        // Redirect to home page or the page they were trying to access
-        router.push("/");
+        // Redirect to the original page they were trying to access, or home page
+        router.push(redirectPath);
         router.refresh();
       } else {
         const data = await response.json();
