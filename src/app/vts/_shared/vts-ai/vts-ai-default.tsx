@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useImperativeHandle, forwardRef, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { vtsAiPromptsWithContext, vtsAiPromptsWithoutContext } from "../data/vts-ai-prompts";
+import { getPromptsForPath } from "../data/vts-ai-prompts";
 import VtsAiHeader from "./_vts-ai-header";
 import { usePathname } from "next/navigation";
 import VtsAiLoader from "./_vts-ai-loader";
@@ -107,14 +107,14 @@ const VtsAiDefault = forwardRef<
   };
 
   useEffect(() => {
-    setPrompts(pathname === "/vts/lease/deals/profile" ? vtsAiPromptsWithContext : vtsAiPromptsWithoutContext);
+    setPrompts(getPromptsForPath(pathname));
   }, [pathname]);
 
   const resetConversation = () => {
     setSelectedPrompt(null);
     setIsLoading(false);
     setIsTransitioning(false);
-    setPrompts(pathname === "/vts/lease/deals/profile" ? vtsAiPromptsWithContext : vtsAiPromptsWithoutContext);
+    setPrompts(getPromptsForPath(pathname));
     initializeInputs();
     setSelectedCategory("Strategic Planning");
   };
@@ -151,7 +151,7 @@ const VtsAiDefault = forwardRef<
 
   useEffect(() => {
     if (isOpen && vtsAiData) {
-      const allPrompts = pathname === "/vts/lease/deals/profile" ? vtsAiPromptsWithContext : vtsAiPromptsWithoutContext;
+      const allPrompts = getPromptsForPath(pathname);
       const matchedPrompt = allPrompts.find((p) => JSON.stringify(p.payload) === JSON.stringify(vtsAiData));
 
       if (matchedPrompt) {
@@ -173,7 +173,7 @@ const VtsAiDefault = forwardRef<
   }, [selectedPrompt]);
 
   const handleFollowUpClick = (followUp: string) => {
-    const allPrompts = pathname === "/vts/lease/deals/profile" ? vtsAiPromptsWithContext : vtsAiPromptsWithoutContext;
+    const allPrompts = getPromptsForPath(pathname);
     const prompt = allPrompts.find((p) => p.prompt === followUp);
 
     if (prompt) {

@@ -1,10 +1,9 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useRef, useCallback } from "react";
 import {
-  vtsAiPromptsWithoutContext,
   VtsAiPrompt,
+  getPromptsForPath,
 } from "../data/vts-ai-prompts";
-import { vtsAiPromptsWithContext } from "../data/vts-ai-prompts";
 
 interface PromptCycleConfig {
   promptDuration?: number;
@@ -26,10 +25,7 @@ export const usePromptCycle = ({
   const [shuffledPrompts, setShuffledPrompts] = useState<VtsAiPrompt[]>([]);
 
   useEffect(() => {
-    const sourcePrompts =
-      pathname === "/vts/lease/deals/profile"
-        ? vtsAiPromptsWithContext
-        : vtsAiPromptsWithoutContext;
+    const sourcePrompts = getPromptsForPath(pathname);
 
     const array = [...sourcePrompts];
     for (let i = array.length - 1; i > 0; i--) {
